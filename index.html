@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#171717" />
+    <meta name="description" content="Gestão administrativa da Poukas Team Jiu-Jitsu e MMA." />
+    <title>Poukas Team | Gestão</title>
+    <link rel="icon" type="image/png" href="assets/poukas-logo-original.png" />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="supabase-config.js"></script>
+    <script type="module" src="app.js"></script>
+  </head>
+  <body>
+    <section id="auth-view" class="auth-layout" aria-labelledby="login-title">
+      <div class="auth-brand-panel">
+        <a class="wordmark" href="#" aria-label="Poukas Team, início">
+          <img class="brand-mark-image" src="assets/poukas-logo-original.png" alt="" />
+          <span>POUKAS <b>TEAM</b></span>
+        </a>
+        <div class="brand-copy">
+          <p class="eyebrow">JIU-JITSU <span>·</span> MMA</p>
+          <h1>Treino forte.<br />Gestão no eixo.</h1>
+          <p>O espaço de trabalho da equipe Poukas.</p>
+        </div>
+        <div class="brand-foot"><span class="status-dot"></span> ACESSO DA EQUIPE</div>
+      </div>
+      <div class="auth-form-panel">
+        <form id="login-form" class="login-form">
+          <img class="login-logo" src="assets/poukas-logo-original.png" alt="Poukas Team, Jiu-Jitsu e MMA" />
+          <p class="eyebrow form-eyebrow">ÁREA ADMINISTRATIVA</p>
+          <h2 id="login-title">Entrar na gestão</h2>
+          <p class="form-intro">Use o e-mail e a senha da sua conta da equipe.</p>
+          <label for="email">E-mail</label>
+          <input id="email" name="email" type="email" autocomplete="username" placeholder="nome@academia.com.br" required />
+          <label for="password">Senha</label>
+          <input id="password" name="password" type="password" autocomplete="current-password" placeholder="Sua senha" required />
+          <p id="auth-error" class="notice notice-error" role="alert" hidden></p>
+          <p id="auth-info" class="notice notice-info" role="status" hidden></p>
+          <button id="login-button" class="button button-primary login-button" type="submit">
+            <span>Entrar</span><span aria-hidden="true">↗</span>
+          </button>
+          <button id="demo-button" class="button button-secondary demo-button" type="button">
+            <span>Ver demonstração sem login</span><span aria-hidden="true">↗</span>
+          </button>
+          <p class="privacy-note">Acesso restrito a usuários autorizados.</p>
+        </form>
+        <footer class="auth-footer">POUKAS TEAM <span>·</span> SISTEMA DE GESTÃO</footer>
+      </div>
+    </section>
+
+    <div id="app-view" class="app-shell" hidden>
+      <aside class="sidebar">
+        <a class="wordmark sidebar-wordmark" href="#" aria-label="Poukas Team">
+          <img class="brand-mark-image brand-mark-image-light" src="assets/poukas-logo-original.png" alt="" />
+          <span>POUKAS <b>TEAM</b></span>
+        </a>
+        <p class="nav-caption">ESPAÇO DA ACADEMIA</p>
+        <nav class="primary-nav" aria-label="Navegação principal">
+          <a class="nav-item nav-item-active" href="#inicio" data-page="dashboard" aria-current="page"><span class="nav-icon" aria-hidden="true">⌂</span> Visão geral</a>
+          <a class="nav-item" href="#alunos" data-page="students"><span class="nav-icon" aria-hidden="true">◉</span> Alunos</a>
+          <a class="nav-item" href="#modalidades" data-page="modalities"><span class="nav-icon" aria-hidden="true">◈</span> Modalidades</a>
+        </nav>
+        <div class="sidebar-bottom">
+          <span class="secure-label"><span class="status-dot"></span> <span id="connection-label">CONEXÃO SEGURA</span></span>
+          <span class="sidebar-version">POUKAS TEAM · GESTÃO</span>
+        </div>
+      </aside>
+
+      <main class="main-panel" id="inicio">
+        <div id="demo-banner" class="demo-banner" role="status" hidden>
+          <span class="demo-banner-label">MODO DEMONSTRAÇÃO</span>
+          <span>Dados fictícios. Nenhuma informação é consultada ou salva.</span>
+          <button id="exit-demo-button" type="button">Sair da demonstração</button>
+        </div>
+        <header class="topbar">
+          <div>
+            <p class="eyebrow topbar-eyebrow">POUKAS TEAM / ADMINISTRAÇÃO</p>
+            <h1 id="page-title">Visão geral</h1>
+          </div>
+          <div class="account-area">
+            <div class="account-copy"><span id="user-name">Equipe</span><small id="user-role">Funcionário</small></div>
+            <span class="avatar" id="user-avatar" aria-hidden="true">P</span>
+            <button id="sign-out-button" class="icon-button" type="button" title="Sair" aria-label="Sair da conta">↗</button>
+          </div>
+        </header>
+        <section id="dashboard-section" class="page-view">
+          <section class="welcome-section" aria-labelledby="welcome-title">
+            <div class="welcome-kicker"><span class="status-dot"></span> PRIMEIRA ETAPA</div>
+            <h2 id="welcome-title">A base está pronta.</h2>
+            <p>A autenticação está ativa. Os dados administrativos aparecerão aqui assim que os módulos forem implantados e conectados ao Supabase.</p>
+            <div class="welcome-meta"><span>SESSÃO AUTENTICADA</span><span id="session-email"></span></div>
+          </section>
+          <section class="setup-strip" aria-label="Etapas do sistema">
+            <div class="setup-step setup-step-done"><span>01</span><div><b>Estrutura e acesso</b><small>CONCLUÍDO</small></div></div>
+            <div class="setup-rule" aria-hidden="true"></div>
+            <div class="setup-step"><span>02</span><div><b>Alunos e modalidades</b><small>EM USO</small></div></div>
+            <div class="setup-rule" aria-hidden="true"></div>
+            <div class="setup-step"><span>03</span><div><b>Equipe Poukas</b><small>JIU-JITSU · MMA</small></div></div>
+          </section>
+          <footer class="main-footer">As cobranças pelo WhatsApp exigem revisão e envio manual pelo usuário.</footer>
+        </section>
+
+        <section id="students-section" class="page-view students-view" aria-labelledby="students-title" hidden>
+          <div class="students-heading">
+            <div>
+              <p class="eyebrow">CADASTROS DA ACADEMIA</p>
+              <h2 id="students-title">Alunos</h2>
+              <p>Consulte a situação das mensalidades e prepare cobranças individuais.</p>
+            </div>
+            <div class="students-heading-actions">
+              <button id="add-student-button" class="button button-primary add-student-button" type="button">+ Adicionar aluno</button>
+              <button id="refresh-students" class="icon-button refresh-button" type="button" title="Atualizar alunos" aria-label="Atualizar alunos">↻</button>
+            </div>
+          </div>
+          <form id="student-form" class="student-form" hidden>
+            <div class="student-form-heading"><div><p class="eyebrow">NOVO CADASTRO</p><h3>Adicionar aluno</h3></div><button id="cancel-student-form" class="icon-button" type="button" aria-label="Fechar formulário">×</button></div>
+            <div class="student-form-grid">
+              <label class="form-field form-field-wide" for="student-name-input">Nome completo<input id="student-name-input" name="full_name" type="text" autocomplete="name" required maxlength="120" placeholder="Nome do aluno" /></label>
+              <label class="form-field" for="student-phone-input">Telefone com DDD<input id="student-phone-input" name="phone" type="tel" autocomplete="tel" required placeholder="(11) 94359-6607" /></label>
+              <label class="form-field" for="student-due-day">Dia de vencimento<input id="student-due-day" name="due_day" type="number" min="1" max="31" value="10" required /></label>
+              <fieldset class="modality-options">
+                <legend>Modalidades</legend>
+                <label><input type="checkbox" name="student_modalities" value="jiu-jitsu" /> Jiu-Jitsu <span>R$ 90/mês</span></label>
+                <label><input type="checkbox" name="student_modalities" value="mma" /> MMA <span>R$ 70/mês</span></label>
+              </fieldset>
+            </div>
+            <div class="student-form-footer"><span id="student-price-preview">Selecione uma modalidade</span><button class="button button-primary" type="submit">Salvar aluno</button></div>
+            <p id="student-form-feedback" class="form-feedback" role="status" hidden></p>
+          </form>
+          <div class="students-toolbar">
+            <label class="search-field" for="student-search"><span aria-hidden="true">⌕</span><input id="student-search" type="search" placeholder="Buscar aluno pelo nome ou telefone" autocomplete="off" /></label>
+            <span id="student-count" class="student-count"></span>
+          </div>
+          <p id="students-feedback" class="students-feedback" role="status" aria-live="polite">Carregando alunos...</p>
+          <div id="students-table-wrap" class="students-table-wrap" hidden>
+            <table class="students-table">
+              <thead><tr><th scope="col">Aluno</th><th scope="col">Telefone</th><th scope="col">Situação</th><th scope="col">Modalidades</th><th scope="col">Mensalidade</th><th scope="col">Selecionar cobrança</th></tr></thead>
+              <tbody id="students-table-body"></tbody>
+            </table>
+          </div>
+          <p id="whatsapp-disclaimer" class="whatsapp-disclaimer">O WhatsApp abrirá com a mensagem preenchida. Nada será enviado pelo sistema; revise e envie manualmente no WhatsApp.</p>
+        </section>
+
+        <section id="modalities-section" class="page-view modalities-view" aria-labelledby="modalities-title" hidden>
+          <div class="students-heading">
+            <div><p class="eyebrow">TREINOS DA ACADEMIA</p><h2 id="modalities-title">Modalidades</h2><p>Planos mensais de demonstração e alunos vinculados.</p></div>
+          </div>
+          <div id="modalities-list" class="modalities-list"></div>
+          <p class="demo-module-note">No modo demonstração, cadastros e vínculos são locais e temporários.</p>
+        </section>
+      </main>
+    </div>
+  </body>
+</html>
